@@ -1,0 +1,75 @@
+[versions]
+agp = "8.7.2"
+coreTesting = "2.2.0"
+coreVersion = "1.6.1"
+glideVersion = "4.16.0"
+kotlin = "2.1.0"
+coreKtx = "1.16.0"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+appcompat = "1.7.0"
+kotlinxCoroutinesTest = "1.8.0"
+material = "1.12.0"
+activity = "1.10.1"
+constraintlayout = "2.2.1"
+ktorClientAndroid = "3.1.0"
+ktorClientCio = "3.1.0"
+ktorClientContentNegotiation = "3.1.0"
+ktorClientCore = "3.1.0"
+ktorClientLogging = "2.3.6"
+ktorSerializationKotlinxJson = "3.1.0"
+mockk = "1.13.5"
+pagingCommon = "3.3.6"
+roomTesting = "2.7.0"
+truth = "1.1.5"
+koin = "4.0.0"
+ksp = "2.0.21-1.0.27"
+
+[libraries]
+androidx-core = { module = "androidx.test:core", version.ref = "coreVersion" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
+androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "pagingCommon" }
+androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "roomTesting" }
+compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glideVersion" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorClientAndroid" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktorClientCio" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientContentNegotiation" }
+ktor-client-core-v310 = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCore" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientLogging" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorSerializationKotlinxJson" }
+
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.7.3" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version = "1.7.3" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version = "3.2.1" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version = "2.6.1" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version = "2.6.1" }
+androidx-room-paging = { module = "androidx.room:room-paging", version = "2.6.1" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version = "2.6.1" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version = "2.7.6" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version = "2.7.6" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+truth = { module = "com.google.truth:truth", version.ref = "truth" }
+
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+android-navigation-safe-args = { id = "androidx.navigation.safeargs", version = "2.7.7" }
+
+
