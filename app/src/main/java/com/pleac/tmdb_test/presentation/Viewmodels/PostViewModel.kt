@@ -9,21 +9,24 @@ import com.pleac.agc.data.data.Post
 import com.pleac.agc.domain.usecase.GetPostsUseCase
 import com.pleac.tmdb_test.data.local.FavoriteMovieDao
 import com.pleac.tmdb_test.domain.model.UiState
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import androidx.paging.cachedIn
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 
 class PostViewModel(
     private val getPostsUseCase: GetPostsUseCase,
-    private val favoriteDao: FavoriteMovieDao
+    favoriteDao: FavoriteMovieDao
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<PagingData<Post>>>(UiState.Loading)
     val uiState: StateFlow<UiState<PagingData<Post>>> = _uiState
+
+    private val _updatedFavoriteId = MutableSharedFlow<Int>()
+    val updatedFavoriteId: SharedFlow<Int> = _updatedFavoriteId
 
     val favoriteMovies: StateFlow<List<FavoriteEntity>> = favoriteDao.getAllFavorites()
         .stateIn(
@@ -53,12 +56,8 @@ class PostViewModel(
 
     fun toggleFavorite(post: FavoriteEntity) {
         viewModelScope.launch {
-            val isFav = favoriteDao.isFavorite(post.id)
-            if (!isFav) {
-                favoriteDao.insert(FavoriteEntity(post.id, post.title))
-            } else {
-                favoriteDao.delete(post)
-            }
+            val updatedId = getPostsUseCase.invoke(post)
+            _updatedFavoriteId.emit(updatedId)
         }
     }
 

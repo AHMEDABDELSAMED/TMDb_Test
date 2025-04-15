@@ -13,11 +13,11 @@ import com.pleac.tmdb_test.domain.model.FavoriteEntity
 import com.pleac.tmdb_test.databinding.ItemPostBinding
 
 class PostAdapter (
-    private val isFavorite: (Int) -> Boolean,
     private val onFavoriteClick: (FavoriteEntity) -> Unit,
     private val onItemClick: (Post) -> Unit
-): PagingDataAdapter<Post, PostAdapter.PostViewHolder>(DiffCallback) {
 
+): PagingDataAdapter<Post, PostAdapter.PostViewHolder>(DiffCallback) {
+    private var favoriteIds: Set<Int> = emptySet()
     object DiffCallback : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post) = oldItem.id == newItem.id
         override fun areContentsTheSame(oldItem: Post, newItem: Post) = oldItem == newItem
@@ -27,7 +27,7 @@ class PostAdapter (
         RecyclerView.ViewHolder(binding.root) {
         fun bind(post: Post) {
             binding.apply {
-                binding.root.setOnClickListener {
+                root.setOnClickListener {
                     onItemClick(post)
                 }
                 Title.text = post.title
@@ -49,6 +49,23 @@ class PostAdapter (
                     .into(imagePoster)
             }
         }
+    }
+    private fun isFavorite(id: Int): Boolean = favoriteIds.contains(id)
+
+    fun updateFavorites(newFavorites: Set<Int>) {
+        val oldFavorites = favoriteIds
+        favoriteIds = newFavorites
+
+        val changedIds = (oldFavorites union newFavorites) - (oldFavorites intersect newFavorites)
+
+        changedIds.forEach { changedId ->
+            val position = snapshot().items.indexOfFirst { it.id == changedId }
+            if (position != -1) notifyItemChanged(position)
+        }
+    }
+    fun updateFavoriteItemById(id: Int) {
+        val position = snapshot().items.indexOfFirst { it.id == id }
+        if (position != -1) notifyItemChanged(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
